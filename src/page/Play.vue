@@ -54,8 +54,8 @@ export default {
   methods: {
     getsongs(tyep, id) {
       service.post("/song/play/", { type: tyep, id: id }).then(data => {
-        this.songlistData = data.data;
-        this.title = data.title;
+        this.songlistData = data.data.data;
+        this.title = data.data.title;
       });
     }
   }

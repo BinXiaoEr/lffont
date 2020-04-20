@@ -1,27 +1,8 @@
 <template>
   <el-container class="home-container">
     <el-header class="header" style="height:90px">
-      <div class="main clearfix">
-        <el-row type="flex" class="row-bg">
-          <el-col :span="6" :offset="2">
-            <div class="logo">
-              <img src="../assets/images/logo.png" alt />
-            </div>
-          </el-col>
-          <el-col :span="6" :offset="6">
-            <div class="inputsearch">
-              <el-input placeholder="搜索音乐|歌手">
-                <el-button slot="append" icon="el-icon-search"></el-button>
-              </el-input>
-            </div>
-          </el-col>
-          <el-col :span="2" :offset="2">
-            <div class="inputsearch">
-              <el-button type="info" @click="logout">退出</el-button>
-            </div>
-          </el-col>
-        </el-row>
-      </div>
+       <!-- 头部样式 -->
+      <Header />
     </el-header>
     <el-main>
       <!-- 歌单推荐 -->
@@ -51,9 +32,11 @@ import splitArray from "../util/splitArray";
 import SingHotRec from "../components/SingHotRec";
 import PlayListHotRec from "../components/PlayListHotRec";
 import SongHotRec from "../components/SongHotRec"
+import Header from '../components/Header'
 export default {
   name: "Index",
   components: {
+    Header,
     SingHotRec,
     PlayListHotRec,
     SongHotRec

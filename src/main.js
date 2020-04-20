@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import './plugins/element.js'
 import './assets/css/global.css'
+import 'element-ui/lib/theme-chalk/index.css'
 // 导入全局样式表
 // 导入字体图标
 import './assets/fonts/iconfont.css'

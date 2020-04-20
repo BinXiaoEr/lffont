@@ -7,6 +7,9 @@ import User from '../components/user/Users.vue'
 import HomePage from '../page/HomePage.vue'
 import play from '../page/Play.vue'
 import Singer from '../page/Singer.vue'
+import Artists from '../page/Artist.vue'
+import PlayList from '../page/PlayList.vue'
+import SearchPage from '../page/SearchPage.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -37,7 +40,23 @@ const routes = [
     path: '/singer/:id',
     name: 'Singer',
     component: Singer
+  },// 歌手详情
+  {
+    path: '/artists/:id?',
+    name: 'Artists',
+    component: Artists,
+  }, //所有歌手页面
+  {
+    path: '/playlists',
+    name: 'PlayList',
+    component: PlayList,
   },
+  // 查询页面
+  {
+    path: '/search*',
+    name: 'search',
+    component: SearchPage
+  }
 ]
 
 const router = new VueRouter({
