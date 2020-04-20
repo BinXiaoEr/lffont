@@ -43,8 +43,8 @@ export default {
     return {
       // 这是登录表单的数据绑定对象
       loginForm: {
-        username: "张三",
-        password: "密码是123"
+        username: "",
+        password: ""
       },
       // 这是表单的验证规则对象
       loginFormRules: {
@@ -53,8 +53,7 @@ export default {
           { min: 2, max: 5, message: "长度在 2 到 5 个字符", trigger: "blur" }
         ],
         password: [
-          { required: true, message: "请输入登录密码", trigger: "blur" },
-          { min: 6, max: 10, message: "长度在 6 到 10 个字符", trigger: "blur" }
+          { required: true, message: "请输入登录密码", trigger: "blur" }
         ]
       }
     };
@@ -71,17 +70,39 @@ export default {
           password: this.loginForm.password,
           username: this.loginForm.username
         };
+        var flag=-1
         service.post("/user/login/", rq_data).then(data => {
+          let re_data = data.data;
+          let _id = re_data.data.id;
+          let _name = re_data.data.name;
           //console.log(data) data 是后台返回的json数据
-          if (data.state == 1) {
-            // console.log(data.message);
-            window.sessionStorage.setItem("token", JSON.stringify(data.token)); // 添加token 字段 
+          if (re_data.state == 1) {
+            // console.log(re_data.token)
+            flag=1
+            this.$cookie.set("userid", _id);
+            this.$cookie.set("username", _name);
+          
+            window.sessionStorage.setItem(
+              "token",
+              re_data.token
+            ); // 添加token 字段
             this.$message({
               // this.$message 是自定义的全局的一个组件
               message: "登录成功",
               type: "success"
             });
-            this.$router.push("/home");
+
+            this.$router.push("/homepage");
+          }
+
+          if (re_data.state == 2) {
+            this.$message({
+              // this.$message 是自定义的全局的一个组件
+              message: "账号|密码错误,请重试",
+              type: "error"
+            });
+            this.loginForm.username = "";
+            this.loginForm.password = "";
           }
         });
       });

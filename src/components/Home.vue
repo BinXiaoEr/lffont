@@ -75,6 +75,8 @@ export default {
   created() {
     this.getMenulist();
     this.activepath=window.sessionStorage.getItem('activepath')
+    // console.log(this.$store.state.userid)
+    // console.log(this.$store.state.username)
   },
   methods: {
     logout() {

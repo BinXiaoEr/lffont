@@ -20,6 +20,8 @@ import axios from 'axios'
 //   console.log(1111)
 //   return config
 // })
+import cookie from 'vue-cookie'
+Vue.prototype.$cookie = cookie;  //配置时候prototype.$这里的名字自己定义不是固定是cookie
 Vue.prototype.$axios = axios
 new Vue({
   router,

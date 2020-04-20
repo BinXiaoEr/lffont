@@ -63,16 +63,15 @@ const router = new VueRouter({
   routes
 })
 
-// router.beforeEach((to, from, next) => {
+router.beforeEach((to, from, next) => {
+  // to 将要访问的路径
+  // from 代表从哪个路径跳转过来的
+  // next 是一个函数 表示放心
+  if (to.path == '/login') return next();
+  const token = window.sessionStorage.getItem('token') // 获取token 
+  if (!token) return next('/login') // 如果token不存在或者校验不对 则 直接跳转到登录
+  // 有token 则直接跳转到对应的页面
+  next()
 
-//   // to 将要访问的路径
-//   // from 代表从哪个路径跳转过来的
-//   // next 是一个函数 表示放心
-//   if (to.path == '/login') return next();
-//   const token = window.sessionStorage.getItem('token') // 获取token 
-//   if (!token) return next('/login') // 如果token不存在或者校验不对 则 直接跳转到登录
-//   // 有token 则直接跳转到对应的页面
-//   next()
-
-// })
+})
 export default router

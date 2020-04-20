@@ -8,14 +8,14 @@
           </li>
         </ul>
         <div class="search-container"><el-input v-model="searchVaue" placeholder="搜索音乐、歌手" suffix-icon="el-icon-search" @keyup.enter.native="submit"></el-input></div>
-        <!-- <div class="login">
-          <span >
-            <div class="userbtn"><span  @click="changeUser" class="layouticon"> | <router-link > 注销</router-link></span></div>
+        <div class="login">
+          <span v-if="username">
+            <div class="userbtn">{{username}} <span class="layouticon"> | <router-link v-bind:to="'/login'"> 注销</router-link></span></div>
           </span>
           <span v-else>
-           <router-link> 登录 | 注册</router-link>
+           <router-link v-bind:to="'/login'"> 登录 | 注册</router-link>
           </span>
-        </div> -->
+        </div>
     </div>
 
   </div>
@@ -33,6 +33,11 @@ export default {
     let name = match.slice(-1)[0]; // 获取插叙的type 字段
     let infos={'homepage':0,'artists':1}
     this.activeIndex=infos[name]
+    let token=window.sessionStorage.getItem('token')
+    // this.username=token.split('|**|')[1].split('"')[0]
+    // this.userid=token.split('|**|')[0]
+    this.username=this.$cookie.get('username')
+    this.userid=this.$cookie.get('userid')
   },
   data() {
     return {
@@ -60,7 +65,8 @@ export default {
       ],
       activeIndex: 0,
       searchVaue: '',
-      user:''
+      username:'',
+      userid:''
     };
   },
 
@@ -132,7 +138,7 @@ export default {
 }
 .login{
   position: absolute;
-  margin-left: 1300px;
+  margin-left: 80%;
   font-size: 18px;
   width: 220px;
 }
