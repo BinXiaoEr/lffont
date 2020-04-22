@@ -6,7 +6,7 @@
     </el-header>
     <PlaylistComponent />
     <el-main></el-main>
-    <el-footer>
+    <!-- <el-footer>
       <el-row>
         <el-col :span="24">
           <div class="footer">
@@ -15,7 +15,7 @@
           </div>
         </el-col>
       </el-row>
-    </el-footer>
+    </el-footer> -->
   </el-container>
 </template>
 

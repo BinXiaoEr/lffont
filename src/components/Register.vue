@@ -53,17 +53,17 @@ export default {
         username: "",
         password: ""
       },
-      title:'用户登录',
-      bttn1:'登录',
-      bttn2:'前往注册',
+      title:'用户注册',
+      bttn1:'注册',
+      bttn2:'前往登录',
       // 这是表单的验证规则对象
       loginFormRules: {
         username: [
           { required: true, message: "请输入用户名", trigger: "blur" },
-          { min: 2, max: 60, message: "长度在 2 到 60 个字符", trigger: "blur" }
+          { min: 2, max: 10, message: "长度在 2 到 10 个字符", trigger: "blur" }
         ],
         password: [
-          { required: true, message: "请输入登录密码", trigger: "blur" }
+          { required: true, message: "请输入注册密码", trigger: "blur" }
         ]
       }
     };
@@ -71,8 +71,7 @@ export default {
   methods: {
     resetLoginForm() {
       // resetFields 重置表单 this.$refs.loginFormRef 获取表单对象  loginFormRef 是表单自定义的一个对象名称
-      this.$refs.loginFormRef.resetFields();
-      this.$router.push("/register")
+       this.$router.push("/login")
     },
     login() {
       this.$refs.loginFormRef.validate(valid => {
@@ -82,40 +81,19 @@ export default {
           username: this.loginForm.username
         };
         var flag=-1
-        service.post("/user/login/", rq_data).then(data => {
+        service.post("/user/register/", rq_data).then(data => {
           let re_data = data.data;
-          let _id = re_data.data.id;
-          let _name = re_data.data.name;
           //console.log(data) data 是后台返回的json数据
-          if (re_data.state == 1) {
-            // console.log(re_data.token)
-            flag=1
-            this.$cookie.set("userid", _id);
-            this.$cookie.set("username", _name);
-          
-            window.sessionStorage.setItem(
-              "token",
-              re_data.token
-            ); // 添加token 字段
-            this.$message({
-              // this.$message 是自定义的全局的一个组件
-              message: "登录成功",
-              type: "success",
-              duration:1000
-            });
-
-            this.$router.push("/homepage");
+          if (re_data.state==1){
+            this.$router.push("/login")
           }
-
-          if (re_data.state == 2) {
+          else{
             this.$message({
               // this.$message 是自定义的全局的一个组件
-              message: "账号|密码错误,请重试",
+              message: "用户名已存在",
               type: "error",
               duration:1000
             });
-            this.loginForm.username = "";
-            this.loginForm.password = "";
           }
         });
       });

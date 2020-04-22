@@ -2,7 +2,7 @@
   <div class="detail-container" v-bind:style="fullSceen">
     <div class="detail-header">
       <h1>
-        <router-link to="/">{{title}}</router-link>
+        {{title}}
       </h1>
     </div>
     <div class="main clearfix">
@@ -73,17 +73,18 @@ export default {
   border-bottom: 1px solid #cccccc;
 }
 .detail-header h1 a {
-  color: #ffffff;
+
+  color:  #FF6600	;
 }
 .detail-header h1 a:hover {
-  color: #31c27c;
+  color:  #FF6600	;
 }
 .detail-header {
-  color: #ffffff;
+  color: #FF6600;
   text-align: center;
 }
 .music-list {
-  color: #cccccc;
+  color:  #FF6600;
 }
 .music-list-item {
   font-size: 16px;
@@ -94,7 +95,7 @@ export default {
   color: #cccccc;
 }
 .music-list-item a:hover {
-  color: #ffffff;
+  color: ;
 }
 .song-name {
   display: inline-block;

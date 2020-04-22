@@ -1,32 +1,12 @@
 <template>
   <el-container class="home-container">
     <el-header class="header" style="height:90px">
-      <div class="main clearfix">
-        <el-row type="flex" class="row-bg">
-          <el-col :span="6" :offset="2">
-            <div class="logo">
-              <img src="../assets/images/logo.png" alt />
-            </div>
-          </el-col>
-          <el-col :span="6" :offset="6">
-            <div class="inputsearch">
-              <el-input placeholder="搜索音乐|歌手">
-                <el-button slot="append" icon="el-icon-search"></el-button>
-              </el-input>
-            </div>
-          </el-col>
-          <el-col :span="2" :offset="2">
-            <div class="inputsearch">
-              <el-button type="info" @click="logout">退出</el-button>
-            </div>
-          </el-col>
-        </el-row>
-      </div>
+       <Header />
     </el-header>
     <el-main>
        <SingerComponent :singerId="singerId" />
     </el-main>
-    <el-footer>
+    <!-- <el-footer>
       <el-row>
         <el-col :span="24">
           <div class="footer">
@@ -35,7 +15,7 @@
           </div>
         </el-col>
       </el-row>
-    </el-footer>
+    </el-footer> -->
   </el-container>
 </template>
 
@@ -44,11 +24,12 @@
 import service from "../service/BaseDao";
 import splitArray from "../util/splitArray";
 import SingerComponent from '../components/SingerComponent'
-
+import Header from "../components/Header";
 export default {
   name:'Singer',
    components: {
     SingerComponent,
+    Header
   },
   data() {
     return {

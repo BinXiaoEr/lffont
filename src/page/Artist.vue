@@ -1,11 +1,12 @@
 <template>
   <el-container class="home-container">
-     <el-header class="header" style="height:90px">
-       <!-- 头部样式 -->
+    <el-header class="header" style="height:90px">
+      <!-- 头部样式 -->
       <Header />
     </el-header>
     <ArtistsComponent />
     <el-main></el-main>
+
     <el-footer>
       <el-row>
         <el-col :span="24">
@@ -24,7 +25,7 @@
 import service from "../service/BaseDao";
 import splitArray from "../util/splitArray";
 import ArtistsComponent from "../components/ArtistsComponent";
-import Header from '../components/Header'
+import Header from "../components/Header";
 export default {
   name: "Index",
   components: {

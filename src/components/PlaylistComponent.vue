@@ -35,11 +35,11 @@
           >
             <div class="float-left song-index">{{ index +1}}</div>
             <div class="float-left song-name">
-              <router-link target="_blank" v-bind:to="'/song/'+item.id">
+              <router-link target="_blank" v-bind:to="'/play/playlist/'+item.id">
                 <img :src="item.picUrl" alt />
                 <span>{{ item.title }}</span>
               </router-link>
-              <router-link target="_blank" v-bind:to="'/play/song/'+item.id">
+              <router-link target="_blank" v-bind:to="'/play/playlist/'+item.id">
                 <!-- <span class="play">
                   <i class="el-icon-service"></i>
                 </span>-->
@@ -160,11 +160,11 @@ export default {
   cursor: pointer;
 }
 .active-item {
-  background-color: #31c27c;
+  background-color:  #FF6600	;
   color: #fff;
 }
 .tabnav span:hover {
-  background-color: #31c27c;
+  background-color:  #FF6600	;
   color: #fff;
 }
 .rank-header {

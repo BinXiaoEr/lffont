@@ -1,7 +1,7 @@
 <template>
   <el-container class="home-container">
     <el-header class="header" style="height:90px">
-       <!-- 头部样式 -->
+      <!-- 头部样式 -->
       <Header />
     </el-header>
     <el-main>
@@ -12,16 +12,16 @@
       <!-- 歌曲推荐 -->
       <SongHotRec :songlist="songlist" />
     </el-main>
-    <el-footer>
+    <!-- <el-footer>
       <el-row>
         <el-col :span="24">
           <div class="footer">
-            <p>© 2020 - 05 - 湖南科技大学毕业设计 - 音乐推荐系统</p>
+            <p>2020 - 05 - 湖南科技大学毕业设计 - 音乐推荐系统</p>
             <p>- 本站采用 vue+ element-ui 搭建 -</p>
           </div>
         </el-col>
       </el-row>
-    </el-footer>
+    </el-footer> -->
   </el-container>
 </template>
 
@@ -31,8 +31,8 @@ import service from "../service/BaseDao";
 import splitArray from "../util/splitArray";
 import SingHotRec from "../components/SingHotRec";
 import PlayListHotRec from "../components/PlayListHotRec";
-import SongHotRec from "../components/SongHotRec"
-import Header from '../components/Header'
+import SongHotRec from "../components/SongHotRec";
+import Header from "../components/Header";
 export default {
   name: "Index",
   components: {
@@ -49,10 +49,9 @@ export default {
     };
   },
   created() {
-
     this.getplaylist(); // 获取推荐歌单
     this.getsinglist(); // 获取推荐歌手
-    this.getsonglist();// 获取推荐歌曲
+    this.getsonglist(); // 获取推荐歌曲
   },
   methods: {
     // 获取推荐歌单歌单
@@ -69,8 +68,8 @@ export default {
       });
     },
     // 获取歌曲推荐
-    getsonglist(){
-        service.post("/song/hotrec/", {}).then(data => {
+    getsonglist() {
+      service.post("/song/hotrec/", {}).then(data => {
         this.songlist = splitArray(data.data, 9);
       });
     },
@@ -83,7 +82,9 @@ export default {
 <style lang="less" scoped>
 // 全局css
 #app .el-footer {
-  padding: 0;
+
+
+  bottom: 0;
 }
 #app .el-header {
   padding: 0;
@@ -104,15 +105,7 @@ export default {
   line-height: 90px;
   border-bottom: 1px solid #cccccc;
 }
-.logo {
-  float: left;
-  width: 170px;
-  margin-right: 22px;
-  height: 90px;
-}
-.inputsearch {
-  position: absolute;
-}
+
 // footer 底部样式
 .footer {
   padding: 20px 0;
