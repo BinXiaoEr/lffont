@@ -23,7 +23,7 @@
       <div class="login">
         <span v-if="username">
           <div class="userbtn">
-            {{username}}
+            欢迎你,{{username}}
             <a class="layouticon" @click="mylogout">| 注销</a>
           </div>
         </span>
@@ -43,6 +43,15 @@ export default {
     let name = match.slice(-1)[0]; // 获取插叙的type 字段
     let infos = { homepage: 0, artists: 1 ,playlists:2};
     this.activeIndex = infos[name];
+    console.log(this.activeIndex)
+    if (this.activeIndex == null) {
+      this.navigations.push({
+          key: 3,
+          name: "歌手信息",
+          path: ""
+        },)
+        this.activeIndex=3
+    }
     let token = window.sessionStorage.getItem("token");
     this.username = this.$cookie.get("username");
     this.userid = this.$cookie.get("userid");

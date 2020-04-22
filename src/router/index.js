@@ -1,9 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Login from '../components/Login.vue'
-import Home from '../components/Home.vue';
-import Welcome from '../components/Welcome.vue'
-import User from '../components/user/Users.vue'
+// import Login from '../components/Login.vue'
+// import Home from '../components/Home.vue';
+// import Welcome from '../components/Welcome.vue'
+// import User from '../components/user/Users.vue'
 import HomePage from '../page/HomePage.vue'
 import play from '../page/Play.vue'
 import Singer from '../page/Singer.vue'
@@ -11,21 +11,23 @@ import Artists from '../page/Artist.vue'
 import PlayList from '../page/PlayList.vue'
 import SearchPage from '../page/SearchPage.vue'
 import Register from '../components/Register.vue'
+import Login2 from '../components/Login.vue'
 Vue.use(VueRouter)
 
 const routes = [
   { path: '/', redirect: '/login' },// 重定向
-  { path: '/login', component: Login },
+  // { path: '/login', component: Login },
+  { path: '/login', component: Login2 },
   { path: '/register', component: Register },
   // children 代表是子路由
-  {
-    path: '/home', component: Home,
-    redirect: '/welcome', //重定向到vue组件中
-    children: [
-      { path: '/welcome', component: Welcome },
-      { path: '/30', component: User }
-    ]
-  },
+  // {
+  //   path: '/home', component: Home,
+  //   redirect: '/welcome', //重定向到vue组件中
+  //   children: [
+  //     { path: '/welcome', component: Welcome },
+  //     { path: '/30', component: User }
+  //   ]
+  // },
   {
     path:'/homepage',component:HomePage
   },

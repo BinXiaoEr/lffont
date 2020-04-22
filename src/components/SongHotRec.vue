@@ -46,7 +46,7 @@ export default {
 
 <style scoped>
 .recommend-wrap {
-  background: #ffffff;
+  background: #f5f5f5;
   height: 530px;
   padding: 20px;
 }

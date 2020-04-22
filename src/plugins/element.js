@@ -22,7 +22,8 @@ import {
   Pagination,
   Footer,
   Carousel,
-  CarouselItem
+  CarouselItem,
+  Checkbox
 } from 'element-ui'
 // 注册 全局可用
 Vue.use(Button)
@@ -48,5 +49,6 @@ Vue.use(Pagination)
 Vue.use(Footer)
 Vue.use(Carousel)
 Vue.use(CarouselItem)
+Vue.use(Checkbox)
 // 把message 挂载到vue原型组件中 这样 全局都可以使用this.$message使用
 Vue.prototype.$message = Message

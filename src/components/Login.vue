@@ -1,62 +1,40 @@
+<!-- loading页面 -->
 <template>
-  <div class="login_container">
-    <div class='htitle'>
-        <h1 >湖南科技大学毕业设计-音乐推荐系统</h1>
-      </div>
-    <div class="login_box">
-      
-      <!-- 头像区域 -->
-      <!-- <div class="avatar_box">
-        <img src="../assets/logo.png" alt />
-      </div> -->
-      <div class="h3title">
-        <h3>{{title}}</h3>
-      </div>
-      <!-- 登录表单区域 -->
-      <el-form
-        ref="loginFormRef"
-        label-width="0px"
-        class="login_form"
-        :model="loginForm"
-        :rules="loginFormRules"
-      >
-        <!-- 用户名 -->
+  <div class="login-box">
+    <div class="login-inner">
+      <p class="logo-bar">
+        <!-- <img src="../../static/img/logo.png" alt=""> -->
+        <img src="../../static/img/logo.jpg" alt="">
+        <span>
+          <!-- 青塔 · 全球科研数据云平台 -->
+          湖南科大学毕业设计-音乐推荐系统
+        </span>
+      </p>
+      <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules">
         <el-form-item prop="username">
-          <el-input v-model="loginForm.username" prefix-icon="iconfont icon-user"></el-input>
+          <el-input v-model="loginForm.username"></el-input>
         </el-form-item>
-        <!-- 密码 -->
         <el-form-item prop="password">
-          <el-input
-            v-model="loginForm.password"
-            prefix-icon="iconfont icon-3702mima"
-            type="password"
-          ></el-input>
-        </el-form-item>
-        <!-- 按钮区域 -->
-        <el-form-item class="btncss">
-          <el-button type="primary" @click="login">{{bttn1}}</el-button>
-          <el-button type="info" @click="resetLoginForm">{{bttn2}}</el-button>
+          <el-input v-model="loginForm.password" type="password" @keyup.native.enter="login"></el-input>
         </el-form-item>
       </el-form>
+      <el-button type="primary" @click="login" class="loginBtn">登录</el-button>
+      <el-button type="text" @click="doRegister" class="registerBtn">没有账号，立即注册</el-button>
     </div>
   </div>
 </template>
 
 <script>
-// import qs from "qs";
 import service from "../service/BaseDao";
 export default {
+  name: "c-type",
   data() {
     return {
-      // 这是登录表单的数据绑定对象
       loginForm: {
         username: "",
         password: ""
       },
-      title:'用户登录',
-      bttn1:'登录',
-      bttn2:'前往注册',
-      // 这是表单的验证规则对象
+      checked: "",
       loginFormRules: {
         username: [
           { required: true, message: "请输入用户名", trigger: "blur" },
@@ -69,10 +47,12 @@ export default {
     };
   },
   methods: {
-    resetLoginForm() {
-      // resetFields 重置表单 this.$refs.loginFormRef 获取表单对象  loginFormRef 是表单自定义的一个对象名称
-      this.$refs.loginFormRef.resetFields();
-      this.$router.push("/register")
+    open(str, type) {
+      this.$message({
+        message: str,
+        type: type,
+        duration: 800
+      });
     },
     login() {
       this.$refs.loginFormRef.validate(valid => {
@@ -81,27 +61,23 @@ export default {
           password: this.loginForm.password,
           username: this.loginForm.username
         };
-        var flag=-1
+        
         service.post("/user/login/", rq_data).then(data => {
           let re_data = data.data;
-          let _id = re_data.data.id;
-          let _name = re_data.data.name;
+          
           //console.log(data) data 是后台返回的json数据
           if (re_data.state == 1) {
+            let _id = re_data.data.id;
+            let _name = re_data.data.name;
             // console.log(re_data.token)
-            flag=1
             this.$cookie.set("userid", _id);
             this.$cookie.set("username", _name);
-          
-            window.sessionStorage.setItem(
-              "token",
-              re_data.token
-            ); // 添加token 字段
+            window.sessionStorage.setItem("token", re_data.token); // 添加token 字段
             this.$message({
               // this.$message 是自定义的全局的一个组件
               message: "登录成功",
               type: "success",
-              duration:1000
+              duration: 1000
             });
 
             this.$router.push("/homepage");
@@ -112,84 +88,25 @@ export default {
               // this.$message 是自定义的全局的一个组件
               message: "账号|密码错误,请重试",
               type: "error",
-              duration:1000
+              duration: 1000
             });
             this.loginForm.username = "";
             this.loginForm.password = "";
           }
         });
       });
+    },
+    doRegister() {
+      this.$router.push({ path: "/regpage" });
     }
+  },
+  created() {},
+  mounted() {
+
   }
 };
 </script>
 
-
-<style lang="less" scoped>
-.login_container {
-  background-color: #EE7700;
-  height: 100%;
-}
-.htitle{
-  // width: 450px;
-  // height: 300px;
-  // background-color: #fff;
-  // border-radius: 3px;
-  font-size: 20px;
-  // background-color:black;
-  color: black;
-  position: absolute;
-  left: 50%;
-  top: 20%;
-  transform: translate(-50%, -50%);
-}
-.h3title{
-  font-size: 20px;
-  position: absolute;
-  left: 50%;
-  top: 20%;
-  transform: translate(-50%, -50%);
-}
-.login_box {
-  width: 450px;
-  height: 300px;
-  background-color: #fff;
-  border-radius: 3px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-
-  /* 设置对应 position left top transform 设置 标志在最中间 */
-  .avatar_box {
-    height: 130px;
-    width: 130px;
-    border: 1px solid #eeee;
-    border-radius: 50%;
-    padding: 10px;
-    box-shadow: 0 0 10px #ddd;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-    img {
-      width: 100%;
-      height: 100%;
-      border-radius: 50%;
-      background-color: #eee;
-    }
-  }
-}
-.btncss {
-  // 有对其
-  display: flex;
-  justify-content: flex-end;
-}
-.login_form {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  padding: 0 20px;
-  box-sizing: border-box;
-}
+<style lang='less'>
+@import "../../static/less/login.less";
 </style>

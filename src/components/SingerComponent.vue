@@ -147,8 +147,8 @@ export default {
 .play_more_btn {
   min-width: 122px;
   text-align: center;
-  border: 1px solid #31c27c;
-  background-color: #31c27c;
+  border: 1px solid #FF6600;
+  background-color: #FF6600;
   color: #fff;
   cursor: pointer;
   border-radius: 2px;
@@ -165,7 +165,7 @@ export default {
   transition: all 0.3s;
 }
 .play_more_btn:hover {
-  background-color: #009a61;
+  background-color: #FF6600;
 }
 .mod-data-item {
   display: inline-block;

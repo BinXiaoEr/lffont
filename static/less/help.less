@@ -1,0 +1,121 @@
+@import url('init.less');
+.help-center{
+	position: relative;
+	&:before{
+		content: '';
+	    position: absolute;
+	    left: 0;
+	    top: 0;
+	    width: 50%;
+	    height: 100%;
+	    background-color: #F5F6FA;
+	    z-index:-1;
+	}
+	.help-inner{
+		margin:auto;
+		width:1120px;
+		.after;
+	}
+	.lf-menu{
+		width:25%;
+		background-color: #F5F6FA;
+		float: left;
+		.el-menu{
+			background-color: #F5F6FA;
+			border-right:none;
+			.el-menu-item, .el-submenu__title{
+				height:35px;
+				line-height: 35px;
+				color:@font-c;
+				&:hover,&:focus{
+					// background-color: #f9f9f9;
+					border-radius:5px;
+					color:@main-color;
+					background-color: transparent;
+				}
+				&:focus{
+					background-color: transparent;
+				}
+			}
+			.is-active{
+				color:@main-color;
+			}
+			.el-submenu__title{
+				font-smoothing:initial;
+				-webkit-font-smoothing:initial;
+			}
+		}
+		.lf-inner{
+			padding:30px;
+			// width:260px;
+			float:right;
+			>p{
+				font-size: 20px;
+				margin-bottom:10px;
+			}
+			.el-input{
+				font-size: 13.5px;
+				margin-bottom:20px;
+			}
+			.el-input__icon{
+				line-height: 32px;
+			}
+		}
+	}
+	.rt-content{
+		padding:30px;
+		width:75%;
+		background-color: #fff;
+		float: left;
+		.rt-inner{
+			// width:800px;
+		}
+		.index-bar,.update-time{
+			font-size: 13.5px;
+			color:@font-c-l;
+			margin-bottom:20px;
+		}
+		// .index-bar{
+		// 	color:@main-color;
+		// }
+		.update-time{
+			font-size: 12.5px;
+		}
+		.title{
+			color:@font-c;
+			position: relative;
+			padding-left:20px;
+			margin-bottom:5px;
+			font-size: 20px;
+			font-smoothing:initial;
+			-webkit-font-smoothing:initial;
+			&:after{
+				content:'';
+				width: 9px;
+				background-color: @main-color;
+				position: absolute;
+				left: 0px;
+				top:9px;
+				bottom:10px;
+			}
+			.rt-info{
+				position: absolute;
+				right:0;
+				top:-5px;
+				font-smoothing:antialiased;
+				-webkit-font-smoothing:antialiased;
+			}
+		}
+		.content{
+			border-top:1px dashed @border-color-l;
+			padding: 20px 0;
+			p{
+				margin-bottom:10px;
+				line-height: 23px;
+			}
+		}
+	}
+}
+.help-center{
+	background-color: transparent;
+}
