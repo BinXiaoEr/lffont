@@ -10,14 +10,16 @@ import Singer from '../page/Singer.vue'
 import Artists from '../page/Artist.vue'
 import PlayList from '../page/PlayList.vue'
 import SearchPage from '../page/SearchPage.vue'
+// import Register from '../components/Register.vue'
+import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
-import Login2 from '../components/Login.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
   { path: '/', redirect: '/login' },// 重定向
   // { path: '/login', component: Login },
-  { path: '/login', component: Login2 },
+  { path: '/login', component: Login },
   { path: '/register', component: Register },
   // children 代表是子路由
   // {

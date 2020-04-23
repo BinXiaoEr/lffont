@@ -1,9 +1,7 @@
 <template>
   <div class="detail-container" v-bind:style="fullSceen">
     <div class="detail-header">
-      <h1>
-        {{title}}
-      </h1>
+      <h1>{{title}}</h1>
     </div>
     <div class="main clearfix">
       <aplayer
@@ -15,6 +13,7 @@
         :showLrc="true"
         :music="songlistData[currentMusicIndex]"
         :listMaxHeight="listHeight"
+        @loadeddata="getinfo($event)"
       />
     </div>
   </div>
@@ -41,7 +40,9 @@ export default {
         65 -
         100 +
         "px",
-      title: ""
+      title: "",
+      userid: "",
+      username: ""
     };
   },
   created() {
@@ -50,6 +51,8 @@ export default {
     let id = match.slice(-1)[0]; // 获取插叙的type 字段
     let tyep = match.slice(-2)[0]; // 获取id
     this.getsongs(tyep, id);
+    this.username = this.$cookie.get("username");
+    this.userid = this.$cookie.get("userid");
   },
   methods: {
     getsongs(tyep, id) {
@@ -57,6 +60,23 @@ export default {
         this.songlistData = data.data.data;
         this.title = data.data.title;
       });
+    },
+    // 只要音乐数据加载完成 说明已经在播放音乐 要记录播放音乐信息
+    getinfo(e) {
+      let mp3url = e.target.currentSrc;
+      let song_id = mp3url.split("=")[1].split(".")[0];
+      // console.log(song_id)
+      let match = window.location.href.split("/");
+      let id = match.slice(-1)[0]; // 获取插叙的type 字段
+      let tyep = match.slice(-2)[0]; // 获取id
+      let rq_data = {
+        type: tyep,
+        id: id,
+        userid: this.userid,
+        songid: song_id
+      };
+      console.log(rq_data)
+      service.post("/user/history/", rq_data).then(data => {});
     }
   }
 };
@@ -73,18 +93,17 @@ export default {
   border-bottom: 1px solid #cccccc;
 }
 .detail-header h1 a {
-
-  color:  #FF6600	;
+  color: #ff6600;
 }
 .detail-header h1 a:hover {
-  color:  #FF6600	;
+  color: #ff6600;
 }
 .detail-header {
-  color: #FF6600;
+  color: #ff6600;
   text-align: center;
 }
 .music-list {
-  color:  #FF6600;
+  color: #ff6600;
 }
 .music-list-item {
   font-size: 16px;
@@ -95,7 +114,7 @@ export default {
   color: #cccccc;
 }
 .music-list-item a:hover {
-  color: ;
+  color: #cccccc;
 }
 .song-name {
   display: inline-block;

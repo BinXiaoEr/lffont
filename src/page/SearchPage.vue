@@ -26,11 +26,12 @@
           >
             <div class="songlist_index">{{ index+1 }}</div>
             <div class="songlist_name">
-              <span>{{ item.title |ellipsis}}</span>
+              <!-- <span>{{ item.title |ellipsis}}</span> -->
               <router-link target="_blank" v-bind:to="'/play/song/'+item.id">
-                <span class="play">
+              <span>{{ item.title |ellipsis}}</span>
+                <!-- <span class="play">
                   <i class="el-icon-service"></i>
-                </span>
+                </span> -->
               </router-link>
             </div>
             <div class="songlist_album">
@@ -40,16 +41,17 @@
           </li>
         </ul>
         <div v-if="currentPage" class="text-center">
-          <el-pagination
-            layout="prev, pager, next"
-            :total="total"
-            :current-page="quryinfo.page"
-            @current-change="getPageChange"
-            class="text-center"
-          ></el-pagination>
-        </div>
+      <el-pagination
+        layout="prev, pager, next"
+        :total="total"
+        :current-page="quryinfo.page"
+        @current-change="getPageChange"
+        class="text-center"
+      ></el-pagination>
+    </div>
       </div>
     </div>
+    
     <Footer />
   </div>
 </template>
@@ -74,7 +76,9 @@ export default {
       quryinfo: {
         page: 1,
         pagesize: 10
-      }
+      },
+      userid:"",
+      username:''
     };
   },
   created() {
@@ -82,6 +86,8 @@ export default {
     this.keyword = decodeURI(window.location.href).split("key=")[1];
     console.log(this.keyword);
     this.getSearch(this.keyword, this.quryinfo);
+    this.username = this.$cookie.get("username");
+    this.userid = this.$cookie.get("userid");
   },
   methods: {
     getSearch(keyword, queryinfo) {
@@ -102,7 +108,7 @@ export default {
         page: 1,
         pagesize: 10
       };
-      this.getSearch(this.keyword,this.quryinfo);
+      this.getSearch(this.keyword, this.quryinfo);
     },
     getPageChange(page) {
       this.quryinfo.page = page;
@@ -122,6 +128,12 @@ export default {
 </script>
 
 <style scoped>
+.main {
+  margin-left: 20%;
+}
+/* .text-center {
+  margin-left: 15%;
+} */
 .search-form {
   position: relative;
   height: 247px;

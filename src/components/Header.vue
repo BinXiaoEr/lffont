@@ -27,7 +27,6 @@
             <a class="layouticon" @click="mylogout">| 注销</a>
           </div>
         </span>
-
       </div>
     </div>
   </div>
@@ -41,20 +40,32 @@ export default {
   created() {
     let match = window.location.href.split("/");
     let name = match.slice(-1)[0]; // 获取插叙的type 字段
-    let infos = { homepage: 0, artists: 1 ,playlists:2};
+    let infos = { homepage: 0, artists: 1, playlists: 2 };
+    // console.log(name)
+    console.log(window.location.href.indexOf("search"));
     this.activeIndex = infos[name];
-    console.log(this.activeIndex)
-    if (this.activeIndex == null) {
-      this.navigations.push({
-          key: 3,
-          name: "歌手信息",
-          path: ""
-        },)
-        this.activeIndex=3
-    }
     let token = window.sessionStorage.getItem("token");
     this.username = this.$cookie.get("username");
     this.userid = this.$cookie.get("userid");
+    if (this.activeIndex == null) {
+      if (window.location.href.indexOf("singer")!=-1) {
+        this.navigations.push({
+          key: 4,
+          name: "歌手信息",
+          path: ""
+        });
+        this.activeIndex = 4;
+      }
+      else if (window.location.href.indexOf("search")!=-1) {
+        this.navigations.push({
+          key: 4,
+          name: "检索列表",
+          path: ""
+        });
+        this.activeIndex = 4;
+    }
+    
+  }
   },
   data() {
     return {
@@ -73,6 +84,11 @@ export default {
           key: 2,
           name: "歌单",
           path: "/playlists"
+        },
+        {
+          key:  3,
+          name: "我的音乐",
+          path: "/minus"
         }
       ],
       activeIndex: 0,
@@ -95,27 +111,23 @@ export default {
         useid: this.userid,
         username: this.username
       };
-      console.log(rq_data)
-      service.post("/user/logout/",rq_data).then(data => {
-        
+      service.post("/user/logout/", rq_data).then(data => {
         if (data.data.state == 1) {
           this.$message({
             // this.$message 是自定义的全局的一个组件
-            message: "注销成功请重新登录",
+            message: "注销成功",
             type: "success",
-            duration:1000
+            duration: 1000
           });
           this.$router.push("/login");
           window.sessionStorage.clear();
         }
       });
-      
     }
   }
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 .header {
   height: 90px;
@@ -125,9 +137,9 @@ export default {
 .logo {
   float: left;
   width: 170px;
-  margin-right: 22px;
+  /* margin-right: 22px; */
   height: 90px;
-  margin-left: 20px;
+  margin-left: 10px;
 }
 .logo img {
   width: 100%;
@@ -136,14 +148,15 @@ export default {
 }
 .header-nav {
   float: left;
-  margin-left: 150px;
+  margin-left: 20px;
+  padding-left: 20px;
 }
 .header-nav li {
   float: left;
-  margin-right: 5px;
+  margin-right: 2px;
 }
 .nav-link-active {
-  background-color: #FF6600	;
+  background-color: #ff6600;
   color: #fff !important;
 }
 .header-nav li a {
@@ -156,18 +169,19 @@ export default {
   transition: all 0.5s;
 }
 .header-nav li a:hover {
-  color:  #FF6600;
+  color: #ff6600;
 }
 .search-container {
   float: left;
-  width: 220px;
-  margin-left:50px ;
+  width: 200px;
+  margin-left: 50px;
 }
 .login {
-  position: absolute;
-  margin-left: 80%;
+  position:absolute;
+ 
+  right: 100px;
   font-size: 18px;
-  width: 220px;
+  
 }
 .father-ul li:hover .drop-div {
   display: block;

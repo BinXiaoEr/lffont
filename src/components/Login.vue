@@ -6,7 +6,6 @@
         <!-- <img src="../../static/img/logo.png" alt=""> -->
         <img src="../../static/img/logo.jpg" alt="">
         <span>
-          <!-- 青塔 · 全球科研数据云平台 -->
           湖南科大学毕业设计-音乐推荐系统
         </span>
       </p>
@@ -97,7 +96,7 @@ export default {
       });
     },
     doRegister() {
-      this.$router.push({ path: "/regpage" });
+      this.$router.push({ path: "/register" });
     }
   },
   created() {},
