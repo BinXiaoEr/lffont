@@ -57,14 +57,13 @@ export default {
     // 获取推荐歌单歌单
     getplaylist() {
       service.post("/playlist/hotrec/", {}).then(data => {
-        //console.log(data) data 是后台返回的json数据
         this.playlist = splitArray(data.data, 5);
       });
     },
     // 获取歌手推荐
     getsinglist() {
       service.post("/sing/hotrec/", {}).then(data => {
-        this.singlist = splitArray(data.data, 3);
+        this.singlist = splitArray(data.data, 5);
       });
     },
     // 获取歌曲推荐

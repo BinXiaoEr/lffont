@@ -1,7 +1,7 @@
 <template>
   <div class="recommend-wrap">
     <div class="recommend">
-      <h2 class="title">歌单推荐</h2>
+      <h2 class="title">热门歌单</h2>
       <el-carousel v-bind:autoplay="false" arrow="always" height="350px">
         <el-carousel-item v-for="(page, pindex) in playlist" :key="pindex">
           <ul class="main clearfix">

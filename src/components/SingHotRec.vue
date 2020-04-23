@@ -1,12 +1,13 @@
 <template>
   <div class="recommend-wrap">
     <div class="recommend">
-      <h2 class="title">歌手推荐</h2>
+      <h2 class="title">热门歌手</h2>
       <el-carousel v-bind:autoplay="false" arrow="always" height="350px">
         <el-carousel-item v-for="(page, pindex) in singlist" :key="pindex">
           <ul class="main clearfix">
             <li v-for="(item, index) in page" :key="index" class="song-menu-item clearifx">
-              <div class="show-img scale-img">
+              <!-- <div class="show-img scale-img"> -->
+              <div class="show-img scale-img float-left">
                 <router-link target="_blank" v-bind:to="'/singer/'+item.id">
                   <img v-bind:src="item.picUrl" alt />
                   <div class="mask">
@@ -14,11 +15,11 @@
                   </div>
                 </router-link>
               </div>
-              <h3 class="nowrap-text">
-                <router-link target="s" v-bind:to="'/singer/'+item.id">{{ item.singer }}</router-link>
-              </h3>
-
-            
+              <div class="show-content float-left">
+                <h3 class="nowrap-text">
+                  <router-link  v-bind:to="'/singer/'+item.id">{{ item.singer }}</router-link>
+                </h3>
+              </div>
             </li>
           </ul>
         </el-carousel-item>
@@ -34,48 +35,46 @@ export default {
 };
 </script>
 
+
 <style scoped>
 .recommend-wrap {
   background: #ffffff;
-  height: 530px;
-  padding: 20px;
+  height: 450px;
+  padding-top:5px ;
+  /* padding: 5px; */
 }
-.recommend {
+.song-menu{
+  height: auto;;
 }
-.song-menu {
-  height: auto;
+h3{
+  margin: 5px 0;
+}
+.nowrap-text{
+  margin-left:80px ;
 }
 .title {
   font-size: 32px;
   text-align: center;
 }
 .song-menu-item {
-  padding-left: 100px;
-  width: 33.3%;
+  width: 20%;
   float: left;
-  padding-right: 15px;
+  padding: 0 20px;
+  overflow: hidden;
 }
-/* .show-img{
-    position: relative;
-    float: left;
-    width: 86px;
-    height: 86px;
-    margin-right: 14px;
-    overflow: hidden;
-} */
-.show-img {
+.show-img{
   position: relative;
   width: 230px;
   height: 230px;
   overflow: hidden;
-  transition: all 0.3s;
+  transition: all .3s;
 }
-.show-img:hover .mask {
+.show-img:hover .mask{
   opacity: 1;
 }
-.mask {
+.mask{
   opacity: 0;
-  transition: all 0.3s;
+  transition: all .3s;
   position: absolute;
   height: 100%;
   width: 100%;
@@ -86,5 +85,6 @@ export default {
   font-size: 60px;
   padding-top: 70px;
   padding-left: 75px;
+
 }
 </style>
