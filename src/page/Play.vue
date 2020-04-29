@@ -1,9 +1,10 @@
 <template>
   <div class="detail-container" v-bind:style="fullSceen">
+    <div class="return" @click="getreturn">返回</div>
     <div class="detail-header">
       <h1>{{title}}</h1>
 
-      <div class="return" @click="getreturn">返回</div>
+      
     </div>
 
     <div class="main clearfix">
@@ -91,7 +92,9 @@ export default {
 
 <style lang="less" scoped>
 .return {
+  float: left;
   font-size:20px ;
+  padding-top: 2%;
   color: #00008B;
 }
 .detail-container {
