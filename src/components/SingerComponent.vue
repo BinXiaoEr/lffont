@@ -77,14 +77,14 @@ export default {
   created() {
     const singerId = this.singerId;
     this.getSinger(singerId);
-    this.url='/play/sing/'+singerId
+    this.url = "/play/sing/" + singerId;
   },
   data() {
     return {
       data: null,
       showMore: false,
       MvList: [],
-      url:null
+      url: null
     };
   },
   methods: {
@@ -102,8 +102,9 @@ export default {
     },
     // 整个歌单播放
     toPlay() {
-      let newwindow=this.$router.resolve(this.url);
-      window.open(newwindow.href,'_blank');
+      this.$router.push(this.url);
+      // let newwindow=this.$router.resolve(this.url);
+      // window.open(newwindow.href,'_blank');
     }
   }
 };
@@ -143,8 +144,8 @@ export default {
 .play_more_btn {
   min-width: 122px;
   text-align: center;
-  border: 1px solid #FF6600;
-  background-color: #FF6600;
+  border: 1px solid #ff6600;
+  background-color: #ff6600;
   color: #fff;
   cursor: pointer;
   border-radius: 2px;
@@ -161,7 +162,7 @@ export default {
   transition: all 0.3s;
 }
 .play_more_btn:hover {
-  background-color: #FF6600;
+  background-color: #ff6600;
 }
 .mod-data-item {
   display: inline-block;

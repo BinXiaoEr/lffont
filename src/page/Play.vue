@@ -2,7 +2,10 @@
   <div class="detail-container" v-bind:style="fullSceen">
     <div class="detail-header">
       <h1>{{title}}</h1>
+
+      <div class="return" @click="getreturn">返回</div>
     </div>
+
     <div class="main clearfix">
       <aplayer
         v-if="songlistData.length"
@@ -55,6 +58,9 @@ export default {
     this.userid = this.$cookie.get("userid");
   },
   methods: {
+    getreturn() {
+      this.$router.go(-1);
+    },
     getsongs(tyep, id) {
       service.post("/song/play/", { type: tyep, id: id }).then(data => {
         this.songlistData = data.data.data;
@@ -84,6 +90,10 @@ export default {
 
 
 <style lang="less" scoped>
+.return {
+  font-size:20px ;
+  color: #00008B;
+}
 .detail-container {
   background-color: #292a2b;
 }

@@ -102,8 +102,9 @@ export default {
     },
     // 整个歌单播放
     toPlay() {
-      let newwindow = this.$router.resolve(this.url);
-      window.open(newwindow.href, "_blank");
+      this.$router.push(this.url);
+      // let newwindow = this.$router.resolve(this.url);
+      // window.open(newwindow.href);
     },
     open(info) {
       this.$alert({
