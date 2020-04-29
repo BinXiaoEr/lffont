@@ -46,7 +46,8 @@
             <span class="banned">（无版权）</span>
           </li>
           <li v-else class="float-left songlist_name">
-            {{ item.title }
+            {{ item.title }}
+            
             <router-link class="inline-block"  v-bind:to="'/play/song/'+item.id">
               <span class="play">
                 <i class="el-icon-service"></i>
@@ -57,7 +58,7 @@
           <li class="float-left songlist_album">
             <router-link
               class="inline-block"
-              
+             
               v-bind:to="'/singer/'+item.sid"
             >{{ item.sname | ellipsis }}</router-link>
           </li>
