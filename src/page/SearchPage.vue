@@ -27,7 +27,7 @@
             <div class="songlist_index">{{ index+1 }}</div>
             <div class="songlist_name">
               <!-- <span>{{ item.title |ellipsis}}</span> -->
-              <router-link target="_blank" v-bind:to="'/play/song/'+item.id">
+              <router-link v-bind:to="'/play/song/'+item.id">
               <span>{{ item.title |ellipsis}}</span>
                 <!-- <span class="play">
                   <i class="el-icon-service"></i>

@@ -51,12 +51,7 @@
           </li>
           <li v-else class="float-left songlist_name">
             {{ item.title }}
-            <!-- <router-link
-              class="inline-block"
-              target="_blank"
-              v-bind:to="'/play/song/'+item.id"
-            >{{ item.title }}</router-link> -->
-            <router-link class="inline-block" target="_blank"   v-bind:to="'/play/song/'+item.id">
+            <router-link class="inline-block" v-bind:to="'/play/song/'+item.id">
               <span class="play">
                 <i class="el-icon-service"></i>
               </span>

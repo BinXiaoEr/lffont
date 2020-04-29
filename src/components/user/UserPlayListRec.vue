@@ -7,7 +7,7 @@
           <ul class="main clearfix">
             <li v-for="(item, index) in page" :key="index" class="song-menu-item">
               <div class="show-img scale-img">
-                <router-link target="_blank" v-bind:to="'/play/playlist/'+item.id">
+                <router-link  v-bind:to="'/play/playlist/'+item.id">
                   <img v-bind:src="item.picUrl" alt />
                   <div class="mask">
                     <i class="el-icon-caret-right"></i>

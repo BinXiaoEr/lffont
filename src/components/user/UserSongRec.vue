@@ -7,7 +7,7 @@
           <ul class="main clearfix">
             <li v-for="(item, index) in page" :key="index" class="song-menu-item clearifx">
               <div class="show-img scale-img float-left">
-                <router-link target="_blank" v-bind:to="'/play/song/'+item.id">
+                <router-link  v-bind:to="'/play/song/'+item.id">
                   <img v-bind:src="item.picUrl" alt />
                   <div class="mask">
                     <i class="el-icon-caret-right"></i>
@@ -16,7 +16,7 @@
               </div>
               <div class="show-content float-left">
                 <h3 class="nowrap-text">
-                  <router-link target="_blank" v-bind:to="'/play/song/'+item.id"> {{item.name| ellipsis}}</router-link>
+                  <router-link  v-bind:to="'/play/song/'+item.id"> {{item.name| ellipsis}}</router-link>
                 </h3>
                 <p> 
                   {{ item.singer }}</p>
