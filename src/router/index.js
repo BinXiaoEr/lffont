@@ -13,7 +13,8 @@ import SearchPage from '../page/SearchPage.vue'
 // import Register from '../components/Register.vue'
 import Login from '../components/Login.vue'
 import Register from '../components/Register.vue'
-
+import PlayListDetail from '../page/PlayListDetail.vue'
+import UserPeformance from '../page/UserPerformance.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -63,6 +64,16 @@ const routes = [
     name: 'search',
     component: SearchPage
   },
+  {
+    path: '/playdetail/:id',
+    name: 'Playdeatil',
+    component: PlayListDetail
+  },// 歌手详情
+  {
+    path: '/minus',
+    name: 'UserPeformance',
+    component: UserPeformance
+  }
 ]
 
 const router = new VueRouter({

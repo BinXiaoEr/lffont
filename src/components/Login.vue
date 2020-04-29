@@ -106,6 +106,6 @@ export default {
 };
 </script>
 
-<style lang='less'>
+<style lang='less' scoped>
 @import "../../static/less/login.less";
 </style>

@@ -3,25 +3,20 @@
     <div class="cover">
       <div class="main clearfix" v-if="data">
         <div class="show-img float-left">
-          <img :src="data.artist.picUrl" alt />
+          <img :src="data.playlist.picUrl" alt />
         </div>
         <div class="singer-info float-left">
-          <h1>
-            <router-link :to="'/singer/'+data.artist.id">{{ data.artist.name }}</router-link>
-          </h1>
-          <p class="desc">{{ data.artist.desc }}</p>
+          <h1>{{ data.playlist.name }}</h1>
+          <el-button type="text" @click="open(data.playlist.desc)">歌单介绍</el-button>
+          <!-- <p class="desc" v-html=" data.playlist.desc ">{{ data.playlist.desc |ellipsis}}</p> -->
           <ul class="mod-data">
             <li class="mod-data-item">
               单曲
-              <strong>{{data.artist.musicSize}}</strong>
+              <strong>{{data.playlist.nums}}首</strong>
             </li>
             <li class="mod-data-item">
-              已收录歌曲
-              <strong>{{data.artist.colletSize}}</strong>
-            </li>
-            <li class="mod-data-item">
-              专辑
-              <strong>{{data.artist.albumSize}}</strong>
+              歌曲类型
+              <strong>{{data.playlist.tags}}</strong>
             </li>
           </ul>
           <div class="text-left">
@@ -31,10 +26,11 @@
       </div>
     </div>
     <div class="songlist main">
-      <h2>已收录歌曲</h2>
+      <h2>歌单歌曲</h2>
       <ul class="songlist_item odd clearfix">
         <li class="float-left songlist_name">歌曲</li>
         <li class="float-left songlist_album">专辑</li>
+        <li class="float-left songlist_album">歌手</li>
         <!-- <li class="float-left songlist_time">时长</li> -->
       </ul>
       <div v-if="data">
@@ -56,14 +52,20 @@
               target="_blank"
               v-bind:to="'/play/song/'+item.id"
             >{{ item.title }}</router-link> -->
-            <router-link class="inline-block" target="_blank"   v-bind:to="'/play/song/'+item.id">
+            <router-link class="inline-block" target="_blank" v-bind:to="'/play/song/'+item.id">
               <span class="play">
                 <i class="el-icon-service"></i>
               </span>
             </router-link>
           </li>
-          <li class="float-left songlist_album">{{ item.album }}</li>
-          <li class="float-left songlist_time">{{ item.playTime }}</li>
+          <li class="float-left songlist_album">{{ item.album | ellipsis }}</li>
+          <li class="float-left songlist_album">
+            <router-link
+              class="inline-block"
+              target="_blank"
+              v-bind:to="'/singer/'+item.sid"
+            >{{ item.sname | ellipsis }}</router-link>
+          </li>
         </ul>
         <div class="text-center">
           <el-button class="max-width" type="success" @click="getMore">{{showMore?"收起":"显示更多"}}</el-button>
@@ -77,28 +79,25 @@
 <script>
 import service from "../service/BaseDao";
 export default {
-  name: "SingerComponent",
-  props: ["singerId"],
+  name: "PlayListDetailComponent",
+  props: ["playlistId"],
   created() {
-    const singerId = this.singerId;
-    this.getSinger(singerId);
-    this.url='/play/sing/'+singerId
+    const playlistId = this.playlistId;
+    // console.log(playlistId);
+    this.getplaylist(playlistId);
+    this.url = "/play/playlist/" + playlistId;
   },
   data() {
     return {
       data: null,
-      showMore: false,
-      MvList: [],
-      url:null
+      showMore: false
     };
   },
   methods: {
-    getSinger() {
-      service.post("/sing/info/", { id: this.singerId }).then(data => {
-        //console.log(data) data 是后台返回的json数据
-        // console.log(data);
-
+    getplaylist() {
+      service.post("/playlist/info/", { id: this.playlistId }).then(data => {
         this.data = data.data;
+
       });
     },
     //  显示更多内容
@@ -107,8 +106,24 @@ export default {
     },
     // 整个歌单播放
     toPlay() {
-      let newwindow=this.$router.resolve(this.url);
-      window.open(newwindow.href,'_blank');
+      let newwindow = this.$router.resolve(this.url);
+      window.open(newwindow.href, "_blank");
+    },
+    open(info) {
+      this.$alert({
+        title: "html片段",
+        message: info,
+        dangerouslyUseHTMLString: true
+      });
+    }
+  },
+  filters: {
+    ellipsis(value) {
+      if (!value) return "";
+      if (value.length > 20) {
+        return value.slice(0, 20) + "...";
+      }
+      return value;
     }
   }
 };
@@ -148,8 +163,8 @@ export default {
 .play_more_btn {
   min-width: 122px;
   text-align: center;
-  border: 1px solid #FF6600;
-  background-color: #FF6600;
+  border: 1px solid #ff6600;
+  background-color: #ff6600;
   color: #fff;
   cursor: pointer;
   border-radius: 2px;
@@ -166,7 +181,7 @@ export default {
   transition: all 0.3s;
 }
 .play_more_btn:hover {
-  background-color: #FF6600;
+  background-color: #ff6600;
 }
 .mod-data-item {
   display: inline-block;
@@ -232,6 +247,10 @@ export default {
 .banned {
   color: #c20c0c;
 }
+/* .el-button{
+  background-color:#ff6600;
+  border-color:#ff6600
+} */
 </style>
 
 

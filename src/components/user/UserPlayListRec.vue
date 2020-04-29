@@ -1,25 +1,23 @@
 <template>
   <div class="recommend-wrap">
     <div class="recommend">
-      <h2 class="title">热门歌手</h2>
+      <h2 class="title">推荐歌单</h2>
       <el-carousel v-bind:autoplay="false" arrow="always" height="350px">
-        <el-carousel-item v-for="(page, pindex) in singlist" :key="pindex">
+        <el-carousel-item v-for="(page, pindex) in playlist" :key="pindex">
           <ul class="main clearfix">
-            <li v-for="(item, index) in page" :key="index" class="song-menu-item clearifx">
-              <!-- <div class="show-img scale-img"> -->
-              <div class="show-img scale-img float-left">
-                <router-link target="_blank" v-bind:to="'/play/sing/'+item.id">
+            <li v-for="(item, index) in page" :key="index" class="song-menu-item">
+              <div class="show-img scale-img">
+                <router-link target="_blank" v-bind:to="'/play/playlist/'+item.id">
                   <img v-bind:src="item.picUrl" alt />
                   <div class="mask">
                     <i class="el-icon-caret-right"></i>
                   </div>
                 </router-link>
               </div>
-              <div class="show-content float-left">
-                <h3 class="nowrap-text">
-                  <router-link  v-bind:to="'/singer/'+item.id">{{ item.singer }}</router-link>
-                </h3>
-              </div>
+              <h3 class="nowrap-text">
+                <router-link target="s" v-bind:to="'/playdetail/'+item.id">{{ item.name }}</router-link>
+              </h3>
+              <p>播放量：{{ Math.floor(item.playCount)}}</p>
             </li>
           </ul>
         </el-carousel-item>
@@ -30,27 +28,20 @@
 
 <script>
 export default {
-  name: "SingHotRec",
-  props: ["singlist"]
+  name: "UserPlayListRec",
+  props: ["playlist"]
 };
 </script>
 
-
 <style  lang="less" scoped>
 .recommend-wrap {
-  background: #ffffff;
-  height: 450px;
-  padding-top:5px ;
-  /* padding: 5px; */
+  background: #f5f5f5;
+  height: 530px;
+  padding: 20px;
 }
-.song-menu{
-  height: auto;;
-}
-h3{
-  margin: 5px 0;
-}
-.nowrap-text{
-  margin-left:80px ;
+
+.song-menu {
+  height: auto;
 }
 .title {
   font-size: 32px;
@@ -59,22 +50,21 @@ h3{
 .song-menu-item {
   width: 20%;
   float: left;
-  padding: 0 20px;
-  overflow: hidden;
+  padding-right: 15px;
 }
-.show-img{
+.show-img {
   position: relative;
   width: 230px;
   height: 230px;
   overflow: hidden;
-  transition: all .3s;
+  transition: all 0.3s;
 }
-.show-img:hover .mask{
+.show-img:hover .mask {
   opacity: 1;
 }
-.mask{
+.mask {
   opacity: 0;
-  transition: all .3s;
+  transition: all 0.3s;
   position: absolute;
   height: 100%;
   width: 100%;
@@ -85,6 +75,5 @@ h3{
   font-size: 60px;
   padding-top: 70px;
   padding-left: 75px;
-
 }
 </style>

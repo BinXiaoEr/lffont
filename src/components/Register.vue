@@ -108,11 +108,11 @@ export default {
             phone: this.form.phonenum,
             realname: this.form.realname
           };
-          console.log(rq_data);
+          // console.log(rq_data);
           service.post("/user/register/", rq_data).then(data => {
             let re_data = data.data;
 
-            console.log(data);
+            // console.log(data);
             if (re_data.state == 1) {
               this.$message({
                 message: "注册成功,请前往登录",
@@ -183,7 +183,7 @@ export default {
 };
 </script>
 
-<style lang='less'>
+<style  lang="less" >
 @import "../../static/less/element.less";
 @import "../../static/less/login.less";
 </style>

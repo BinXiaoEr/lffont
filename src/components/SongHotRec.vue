@@ -18,7 +18,8 @@
                 <h3 class="nowrap-text">
                   <router-link target="_blank" v-bind:to="'/play/song/'+item.id"> {{item.name| ellipsis}}</router-link>
                 </h3>
-                <p>{{ item.singer }}</p>
+                <p> 
+                  {{ item.singer }}</p>
               </div>
             </li>
           </ul>
@@ -44,7 +45,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style  lang="less" scoped>
 .recommend-wrap {
   background: #f5f5f5;
   height: 480px;

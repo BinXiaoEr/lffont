@@ -75,7 +75,7 @@ export default {
         userid: this.userid,
         songid: song_id
       };
-      console.log(rq_data)
+      // console.log(rq_data)
       service.post("/user/history/", rq_data).then(data => {});
     }
   }

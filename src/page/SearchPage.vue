@@ -82,9 +82,9 @@ export default {
     };
   },
   created() {
-    console.log(window.location.href);
+    // console.log(window.location.href);
     this.keyword = decodeURI(window.location.href).split("key=")[1];
-    console.log(this.keyword);
+    // console.log(this.keyword);
     this.getSearch(this.keyword, this.quryinfo);
     this.username = this.$cookie.get("username");
     this.userid = this.$cookie.get("userid");

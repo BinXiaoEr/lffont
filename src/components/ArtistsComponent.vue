@@ -8,7 +8,7 @@
           v-if="artists.length"
           v-for="(item, index) in currentPage"
           :key="index"
-          class="song-menu-item text-center"
+          class="song-menu-item"
         >
           <div class="item-container">
             <div class="show-img">
@@ -42,7 +42,7 @@ export default {
     let page = window.location.pathname.split("/artists/")[1]
       ? window.location.pathname.split("/artists/")[1]
       : 1;
-    console.log(page, this.limit, 10);
+    // console.log(page, this.limit, 10);
     this.getHotArtists(page, this.limit, 10);
     window.data = this.artists;
   },
@@ -54,7 +54,7 @@ export default {
           this.pageIndex=page;
           this.artists[page]=data.data
           this.currentPage = data.data
-          console.log(data.data)
+          // console.log(data.data)
         });
     },
     getPageChange(page) {
@@ -80,7 +80,10 @@ export default {
 };
 </script>
 
-<style scoped>
+<style  lang='less' scoped>
+.el-pagination{
+  margin-left: 20px;
+}
 .recommend-wrap {
   background: #f5f5f5;
 }

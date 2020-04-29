@@ -19,6 +19,7 @@
               :page-size="tagqueryInfo.pagesize"
               layout="pager"
               :total="total_tags"
+              class="el-pagination-tag"
             ></el-pagination>
           </li>
         </ul>
@@ -35,14 +36,15 @@
           >
             <div class="float-left song-index">{{ index +1}}</div>
             <div class="float-left song-name">
-              <router-link target="_blank" v-bind:to="'/play/playlist/'+item.id">
+              <router-link target="_blank" v-bind:to="'/playdetail/'+item.id">
                 <img :src="item.picUrl" alt />
                 <span>{{ item.title }}</span>
               </router-link>
+              
               <router-link target="_blank" v-bind:to="'/play/playlist/'+item.id">
-                <!-- <span class="play">
+                <span class="play">
                   <i class="el-icon-service"></i>
-                </span>-->
+                </span>
               </router-link>
             </div>
             <div class="float-left song-artist v-mid nowrap-text">{{item.artist}}</div>
@@ -137,10 +139,13 @@ export default {
 };
 </script>
 
-<style scoped>
+<style  lang="less" scoped>
 .paginationp_playlist {
   margin: 15px;
   margin-left: 200px;
+}
+.el-pagination-tag{
+  margin-left: 20px;
 }
 .rank-container {
   padding: 0 20px;

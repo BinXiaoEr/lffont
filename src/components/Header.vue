@@ -40,32 +40,36 @@ export default {
   created() {
     let match = window.location.href.split("/");
     let name = match.slice(-1)[0]; // 获取插叙的type 字段
-    let infos = { homepage: 0, artists: 1, playlists: 2 };
-    // console.log(name)
+    let infos = { homepage: 0, artists: 1, playlists: 2 ,minus:3};
     console.log(window.location.href.indexOf("search"));
     this.activeIndex = infos[name];
     let token = window.sessionStorage.getItem("token");
     this.username = this.$cookie.get("username");
     this.userid = this.$cookie.get("userid");
     if (this.activeIndex == null) {
-      if (window.location.href.indexOf("singer")!=-1) {
+      if (window.location.href.indexOf("singer") != -1) {
         this.navigations.push({
           key: 4,
           name: "歌手信息",
           path: ""
         });
         this.activeIndex = 4;
-      }
-      else if (window.location.href.indexOf("search")!=-1) {
+      } else if (window.location.href.indexOf("playdetail") != -1) {
+        this.navigations.push({
+          key: 4,
+          name: "歌单信息",
+          path: ""
+        });
+        this.activeIndex = 4;
+      } else if (window.location.href.indexOf("search") != -1) {
         this.navigations.push({
           key: 4,
           name: "检索列表",
           path: ""
         });
         this.activeIndex = 4;
+      }
     }
-    
-  }
   },
   data() {
     return {
@@ -86,7 +90,7 @@ export default {
           path: "/playlists"
         },
         {
-          key:  3,
+          key: 3,
           name: "我的音乐",
           path: "/minus"
         }
@@ -128,7 +132,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style  lang="less" scoped>
 .header {
   height: 90px;
   line-height: 90px;
@@ -177,11 +181,10 @@ export default {
   margin-left: 50px;
 }
 .login {
-  position:absolute;
- 
+  position: absolute;
+
   right: 100px;
   font-size: 18px;
-  
 }
 .father-ul li:hover .drop-div {
   display: block;

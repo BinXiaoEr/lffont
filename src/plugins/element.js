@@ -23,7 +23,10 @@ import {
   Footer,
   Carousel,
   CarouselItem,
-  Checkbox
+  Checkbox,
+  Alert,
+  Dialog,
+  Loading
 } from 'element-ui'
 // 注册 全局可用
 Vue.use(Button)
@@ -50,5 +53,11 @@ Vue.use(Footer)
 Vue.use(Carousel)
 Vue.use(CarouselItem)
 Vue.use(Checkbox)
+Vue.use(Alert)
+Vue.use(Dialog)
+Vue.use(Loading.directive);
+
+Vue.prototype.$loading = Loading.service;
 // 把message 挂载到vue原型组件中 这样 全局都可以使用this.$message使用
 Vue.prototype.$message = Message
+Vue.prototype.$alert = Message
