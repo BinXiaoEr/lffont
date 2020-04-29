@@ -4,7 +4,7 @@
       <div class="logo">
         <img src="../assets/images/logo3.jpg" alt />
       </div>
-      <ul class="header-nav clearfix">
+      <ul class="header-nav">
         <li v-for="(item, index) in navigations" :key="index" @click="active(index)">
           <router-link
             v-bind:class="activeIndex===index?'nav-link-active':''"
@@ -133,6 +133,10 @@ export default {
 </script>
 
 <style  lang="less" scoped>
+.clearfix{
+  width: 90%;
+  margin-left: 10%;
+}
 .header {
   height: 90px;
   line-height: 90px;
@@ -181,9 +185,9 @@ export default {
   margin-left: 50px;
 }
 .login {
-  position: absolute;
+  float: left;
 
-  right: 100px;
+  margin-left: 20px;
   font-size: 18px;
 }
 .father-ul li:hover .drop-div {
